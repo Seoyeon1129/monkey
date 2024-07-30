@@ -5,8 +5,8 @@ import time
 import math
 
 # 유효한 문자 리스트
-english_characters = string.ascii_letters + string.digits + ".,!?\"'():;"
-korean_characters = [chr(i) for i in range(0xAC00, 0xD7A4)]
+english_characters = string.ascii_letters + string.digits + " .,!?\"'():;"
+korean_characters = [chr(i) for i in range(0xAC00, 0xD7A4)] + string.digits + " .,!?\"'():;"
 
 # 무작위 문자열 생성 함수
 def generate_random_string(length, characters):
@@ -69,6 +69,12 @@ if is_valid_input and input_text:
     # 텍스트 생성을 중지하는 함수
     def stop_generation():
         st.session_state.running = False
+        char_count_display = st.empty()
+        text_area = st.empty()
+        char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
+        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-2000:]}</div>", unsafe_allow_html=True)
+            
+
 
     # 텍스트 생성을 시작하는 함수
     def start_generation():
@@ -90,10 +96,9 @@ if is_valid_input and input_text:
 
             # 생성된 텍스트와 문자 개수 표시
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-            text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-2000:]}</div>", unsafe_allow_html=True)
-            
+            text_area.markdown(f"<div style='word-wrap: break-word; white-space: nowrap;'>{st.session_state.generated_text[-1000:]}</div>", unsafe_allow_html=True)
             # UI 업데이트를 위해 슬립 추가
-            time.sleep(0.05)
+            time.sleep(0.005)
 
     # 버튼 동작 설정
     if start_button:
