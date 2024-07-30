@@ -52,7 +52,7 @@ if is_valid_input and input_text:
     else:
         average_attempts = 0
 
-    st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ",")}")
+    st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ',')}")
 
     # 생성 버튼 및 중지 버튼
     start_button = st.button("생성 시작")
@@ -89,7 +89,7 @@ if is_valid_input and input_text:
 
             # 생성된 텍스트와 문자 개수 표시
             text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-200:]}</div>", unsafe_allow_html=True)
-            char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,"'")}")
+            char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
             # UI 업데이트를 위해 슬립 추가
             time.sleep(0.01)
 
