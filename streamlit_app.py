@@ -97,9 +97,10 @@ if is_valid_input and input_text:
                 stop_generation()
 
             # 생성된 텍스트와 문자 개수 표시
-            text_area.text_area("생성된 텍스트", st.session_state.generated_text, height=200)
+            with scroll_container:
+                st.markdown(f'<div id="scroll-container" style="height:200px; overflow:auto;">{st.session_state.generated_text}</div>', unsafe_allow_html=True)
+                st.components.v1.html(scroll_script)
             char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
-
             # UI 업데이트를 위해 슬립 추가
             time.sleep(0.01)
 
