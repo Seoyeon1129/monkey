@@ -89,7 +89,7 @@ if is_valid_input and input_text:
             # 생성된 텍스트와 문자 개수 표시
             sample_area.write(f"입력한 텍스트: {input_text}")
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{st.session_state.generated_text[-400:]}</div>", unsafe_allow_html=True)
+            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{st.session_state.generated_text[-display_num:]}</div>", unsafe_allow_html=True)
             # UI 업데이트를 위해 슬립 추가
             time.sleep(0.005)
 
