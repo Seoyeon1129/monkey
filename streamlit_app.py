@@ -5,7 +5,7 @@ import time
 import math
 
 # 유효한 문자 리스트
-english_characters = string.ascii_letters + string.digits + " .,!?\"'():;"
+valid_characters = string.ascii_lowercase
 
 
 
@@ -14,16 +14,15 @@ intro_text = """
 무한 원숭이 이론은 무한한 시간 동안 무작위로 타자기를 두드리는 원숭이가 
 결국 셰익스피어의 작품과 같은 특정 텍스트를 작성할 수 있다는 수학적 개념입니다.
 
-아래에 입력한 텍스트와 동일한 문자열이 무작위로 생성될 때까지 
-프로그램이 계속해서 텍스트를 생성합니다.
+당신이 입력한 단어와 동일한 문자열이 생성될 때까지 
+프로그램이 무작위로 텍스트를 생성합니다.
 """
 language='English'
 st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
 
 # 사용자 입력 텍스트
-input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 띄어쓰기, 특수기호(.,?!()\"':;) 사용 가능):", value="")
-valid_characters = english_characters
+input_text = st.text_input("단어를 입력하세요 (알파벳 소문자로 작성, 숫자 및 특수기호 입력 불가)", value="")
 is_valid_input = all(char in valid_characters for char in input_text)
 
 # 입력 검증
@@ -41,8 +40,8 @@ if is_valid_input and input_text:
     else:
         average_attempts = 0
 
-    st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ',')}")
-    st.write(f"약 {format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 텍스트가 등장합니다.")
+    st.write(f"입력한 단어가 나오기까지 평균적으로 필요한 생성 횟수: {format(average_attempts, ',')}")
+    st.write(f"약 {format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 단어가 등장합니다.")
 
     # 생성 버튼 및 중지 버튼
     display_num = 500
