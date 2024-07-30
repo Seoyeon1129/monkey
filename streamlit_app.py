@@ -80,7 +80,7 @@ if is_valid_input and input_text:
         text_area = st.empty()
 
         while st.session_state.running:
-            st.session_state.char_count += 10
+            st.session_state.char_count += 1
             new_char = random.choice(valid_characters)
             st.session_state.generated_text += new_char
 
