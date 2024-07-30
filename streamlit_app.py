@@ -42,9 +42,10 @@ if is_valid_input and input_text:
         average_attempts = 0
 
     st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ',')}")
-    st.write(f"약 {format(format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 텍스트가 등장합니다.")
+    st.write(f"약 {format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 텍스트가 등장합니다.")
 
     # 생성 버튼 및 중지 버튼
+    display_num = st.slider('화면에 표시할 텍스트 길이', 100, 10000, 500, 10)
     start_button = st.button("생성 시작")
     stop_button = st.button("중지")
 
@@ -64,7 +65,7 @@ if is_valid_input and input_text:
         text_area = st.empty()
         sample_area.write(f"입력한 텍스트: {input_text}")
         char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-400:]}</div>", unsafe_allow_html=True)
+        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-display_num:]}</div>", unsafe_allow_html=True)
             
     # 텍스트 생성을 시작하는 함수
     def start_generation():
