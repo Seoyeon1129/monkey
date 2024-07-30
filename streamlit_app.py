@@ -20,7 +20,6 @@ intro_text = """
 language='English'
 st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
-st.markdown("<div style='word-wrap: break-word;'><strong>hello</strong></div>", unsafe_allow_html=True)
 
 # 사용자 입력 텍스트
 input_text = st.text_input("단어를 입력하세요 (알파벳 소문자로 작성, 숫자 및 특수기호 입력 불가)", value="")
@@ -93,6 +92,7 @@ if is_valid_input and input_text:
 
             if st.session_state.generated_text[-input_length:] == input_text:
                 display_text = st.session_state.generated_text.replace(input_text, f"<strong>{input_text}</strong>")
+                st.write(display_text[-20:])
                 sample_area.write(f"입력한 텍스트: {input_text}")
                 char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
                 text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{display_text}</div>", unsafe_allow_html=True)
