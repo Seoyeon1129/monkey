@@ -30,12 +30,10 @@ language = st.selectbox("언어를 선택하세요", ["English", "한국어"])
 # 사용자 입력 텍스트
 if language == "한국어":
     input_text = st.text_input("한글 텍스트를 입력하세요 (한글, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
-    st.write("사용 가능한 문자: 한글, 숫자, 특수기호(.,?!()\"':;)")
     valid_characters = korean_characters
     is_valid_input = all('가' <= char <= '힣' for char in input_text)
 else:
     input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
-    st.write("사용 가능한 문자: 대소문자 알파벳, 숫자, 특수기호(.,?!()\"':;)")
     valid_characters = english_characters
     is_valid_input = all(char in valid_characters for char in input_text)
 
@@ -54,7 +52,7 @@ if is_valid_input and input_text:
     else:
         average_attempts = 0
 
-    st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {average_attempts:.2e}")
+    st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ",")}")
 
     # 생성 버튼 및 중지 버튼
     start_button = st.button("생성 시작")
@@ -79,14 +77,7 @@ if is_valid_input and input_text:
         st.session_state.char_count = 0
         text_area = st.empty()
         char_count_display = st.empty()
-        # HTML과 JavaScript를 사용하여 자동 스크롤 구현
-        scroll_container = st.empty()
-        scroll_script = """
-        <script>
-        var scrollContainer = document.getElementById('scroll-container');
-        scrollContainer.scrollTop = scrollContainer.scrollHeight;
-        </script>
-        """
+
         while st.session_state.running:
             st.session_state.char_count += 1
             new_char = random.choice(valid_characters)
@@ -97,10 +88,8 @@ if is_valid_input and input_text:
                 stop_generation()
 
             # 생성된 텍스트와 문자 개수 표시
-            with scroll_container:
-                st.markdown(f'<div id="scroll-container" style="height:200px; overflow:auto;">{st.session_state.generated_text}</div>', unsafe_allow_html=True)
-                st.components.v1.html(scroll_script)
-            char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
+            text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-200:]}</div>", unsafe_allow_html=True)
+            char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,"'")}")
             # UI 업데이트를 위해 슬립 추가
             time.sleep(0.01)
 
