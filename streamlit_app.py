@@ -30,13 +30,13 @@ language = st.selectbox("언어를 선택하세요", ["한국어", "English"])
 
 # 사용자 입력 텍스트
 if language == "한국어":
-    input_text = st.text_input("한글 텍스트를 입력하세요 (한글, 숫자, 특수기호(.,?!()₩"':;) 사용 가능):", value="")
-    st.write("사용 가능한 문자: 한글, 숫자, 특수기호(.,?!()₩"':;)")
+    input_text = st.text_input("한글 텍스트를 입력하세요 (한글, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
+    st.write("사용 가능한 문자: 한글, 숫자, 특수기호(.,?!()\"':;)")
     valid_characters = korean_characters
     is_valid_input = all('가' <= char <= '힣' for char in input_text)
 else:
-    input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 특수기호(.,?!()₩"':;) 사용 가능):", value="")
-    st.write("사용 가능한 문자: 대소문자 알파벳, 숫자, 특수기호(.,?!()₩"':;)")
+    input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
+    st.write("사용 가능한 문자: 대소문자 알파벳, 숫자, 특수기호(.,?!()\"':;)")
     valid_characters = english_characters
     is_valid_input = all(char in valid_characters for char in input_text)
 
