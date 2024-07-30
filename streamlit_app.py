@@ -91,7 +91,7 @@ if is_valid_input and input_text:
 
             if st.session_state.generated_text[-input_length:] == input_text:
                 display_text = display_text.replace(input_text, f"<strong>{input_text}</strong>")
-                print(display_text[-20:])
+                st.write(display_text[-20:])
                 sample_area.write(f"입력한 텍스트: {input_text}")
                 char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
                 text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{display_text}</div>", unsafe_allow_html=True)
