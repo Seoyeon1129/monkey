@@ -14,7 +14,6 @@ def generate_random_string(length, characters):
 
 # 무한 원숭이 이론 소개글
 intro_text = """
-## 무한 원숭이 이론 테스트
 무한 원숭이 이론은 무한한 시간 동안 무작위로 타자기를 두드리는 원숭이가 
 결국 셰익스피어의 작품과 같은 특정 텍스트를 작성할 수 있다는 수학적 개념입니다.
 
@@ -26,7 +25,7 @@ st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
 
 # 언어 선택
-language = st.selectbox("언어를 선택하세요", ["한국어", "English"])
+language = st.selectbox("언어를 선택하세요", ["English", "한국어"])
 
 # 사용자 입력 텍스트
 if language == "한국어":
@@ -80,7 +79,14 @@ if is_valid_input and input_text:
         st.session_state.char_count = 0
         text_area = st.empty()
         char_count_display = st.empty()
-
+        # HTML과 JavaScript를 사용하여 자동 스크롤 구현
+        scroll_container = st.empty()
+        scroll_script = """
+        <script>
+        var scrollContainer = document.getElementById('scroll-container');
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+        </script>
+        """
         while st.session_state.running:
             st.session_state.char_count += 1
             new_char = random.choice(valid_characters)
