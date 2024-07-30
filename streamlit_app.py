@@ -20,12 +20,9 @@ intro_text = """
 아래에 입력한 텍스트와 동일한 문자열이 무작위로 생성될 때까지 
 프로그램이 계속해서 텍스트를 생성합니다.
 """
-
+language='English'
 st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
-
-# 언어 선택
-language = st.selectbox("언어를 선택하세요", ["English", "한국어"])
 
 # 사용자 입력 텍스트
 if language == "한국어":
