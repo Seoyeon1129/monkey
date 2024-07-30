@@ -69,7 +69,7 @@ if is_valid_input and input_text:
         char_count_display = st.empty()
         text_area = st.empty()
         char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-2000:]}</div>", unsafe_allow_html=True)
+        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-1000:]}</div>", unsafe_allow_html=True)
             
 
 
