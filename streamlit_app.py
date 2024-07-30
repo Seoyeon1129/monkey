@@ -69,7 +69,7 @@ if is_valid_input and input_text:
         char_count_display = st.empty()
         text_area = st.empty()
         char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-1000:]}</div>", unsafe_allow_html=True)
+        text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-400:]}</div>", unsafe_allow_html=True)
             
 
 
@@ -89,7 +89,7 @@ if is_valid_input and input_text:
 
             if st.session_state.generated_text[-input_length:] == input_text:
                 st.success(f"입력한 텍스트 '{input_text}'와 동일한 문자열이 생성되었습니다!")
-                stop_generation()
+                st.session_state.running = False
 
             # 생성된 텍스트와 문자 개수 표시
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
