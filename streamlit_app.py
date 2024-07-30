@@ -102,9 +102,4 @@ if is_valid_input and input_text:
     if stop_button:
         stop_generation()
 
-    # 재개 및 초기화 버튼
-    if not st.session_state.running and st.session_state.generated_text:
-        if st.button("처음부터 다시 시작"):
-            st.session_state.generated_text = ''
-            st.session_state.char_count = 0
-            st.experimental_rerun()
+    
