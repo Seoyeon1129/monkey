@@ -6,7 +6,7 @@ import math
 
 # 유효한 문자 리스트
 english_characters = string.ascii_letters + string.digits + " .,!?\"'():;"
-korean_characters = [chr(i) for i in range(0xAC00, 0xD7A4)] + string.digits + " .,!?\"'():;"
+korean_characters = [chr(i) for i in range(0xAC00, 0xD7A4)] + list(string.digits + " .,!?\"'():;")
 
 # 무작위 문자열 생성 함수
 def generate_random_string(length, characters):
