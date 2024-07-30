@@ -48,7 +48,7 @@ if is_valid_input and input_text:
 
     # 평균적으로 필요한 문자 생성 횟수 계산
     if input_length > 0:
-        average_attempts = math.pow(num_valid_characters, input_length)
+        average_attempts = int(math.pow(num_valid_characters, input_length))
     else:
         average_attempts = 0
 
@@ -102,9 +102,6 @@ if is_valid_input and input_text:
 
     # 재개 및 초기화 버튼
     if not st.session_state.running and st.session_state.generated_text:
-        if st.button("재개"):
-            start_generation()
-
         if st.button("처음부터 다시 시작"):
             st.session_state.generated_text = ''
             st.session_state.char_count = 0
