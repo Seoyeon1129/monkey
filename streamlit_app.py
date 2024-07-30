@@ -47,7 +47,7 @@ if is_valid_input and input_text:
     display_num = 500
     
     status = st.radio('화면에 표시할 텍스트 길이', ['기본값(500)', '직접 설정하기', '무제한'])
-    if status = '기본값(500)':
+    if status == '기본값(500)':
         display_num = 500
     elif status == '직접 설정하기':
         display_num = st.slider('화면에 표시할 텍스트 길이', 100, 10000, 500, 10)
