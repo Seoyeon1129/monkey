@@ -30,7 +30,7 @@ if language == "한국어":
     valid_characters = korean_characters
     is_valid_input = all('가' <= char <= '힣' for char in input_text)
 else:
-    input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
+    input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 띄어쓰기, 특수기호(.,?!()\"':;) 사용 가능):", value="")
     valid_characters = english_characters
     is_valid_input = all(char in valid_characters for char in input_text)
 
