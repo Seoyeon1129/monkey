@@ -20,7 +20,7 @@ intro_text = """
 language='English'
 st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
-st.markdown("<div style='word-wrap: break-word;'><strong>hello</strong></div>"
+st.markdown("<div style='word-wrap: break-word;'><strong>hello</strong></div>")
 
 # 사용자 입력 텍스트
 input_text = st.text_input("단어를 입력하세요 (알파벳 소문자로 작성, 숫자 및 특수기호 입력 불가)", value="")
