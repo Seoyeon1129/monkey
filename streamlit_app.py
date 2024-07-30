@@ -75,11 +75,12 @@ if is_valid_input and input_text:
         st.session_state.running = True
         st.session_state.generated_text = ''
         st.session_state.char_count = 0
-        text_area = st.empty()
+        
         char_count_display = st.empty()
+        text_area = st.empty()
 
         while st.session_state.running:
-            st.session_state.char_count += 1
+            st.session_state.char_count += 10
             new_char = random.choice(valid_characters)
             st.session_state.generated_text += new_char
 
@@ -88,10 +89,11 @@ if is_valid_input and input_text:
                 stop_generation()
 
             # 생성된 텍스트와 문자 개수 표시
-            text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-200:]}</div>", unsafe_allow_html=True)
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
+            text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-2000:]}</div>", unsafe_allow_html=True)
+            
             # UI 업데이트를 위해 슬립 추가
-            time.sleep(0.01)
+            time.sleep(0.05)
 
     # 버튼 동작 설정
     if start_button:
