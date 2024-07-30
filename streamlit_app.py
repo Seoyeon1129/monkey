@@ -6,11 +6,8 @@ import math
 
 # 유효한 문자 리스트
 english_characters = string.ascii_letters + string.digits + " .,!?\"'():;"
-korean_characters = [chr(i) for i in range(0xAC00, 0xD7A4)] + list(string.digits + " .,!?\"'():;")
 
-# 무작위 문자열 생성 함수
-def generate_random_string(length, characters):
-    return ''.join(random.choice(characters) for _ in range(length))
+
 
 # 무한 원숭이 이론 소개글
 intro_text = """
@@ -25,14 +22,9 @@ st.title('무한 원숭이 이론 테스트')
 st.markdown(intro_text)
 
 # 사용자 입력 텍스트
-if language == "한국어":
-    input_text = st.text_input("한글 텍스트를 입력하세요 (한글, 숫자, 특수기호(.,?!()\"':;) 사용 가능):", value="")
-    valid_characters = korean_characters
-    is_valid_input = all('가' <= char <= '힣' for char in input_text)
-else:
-    input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 띄어쓰기, 특수기호(.,?!()\"':;) 사용 가능):", value="")
-    valid_characters = english_characters
-    is_valid_input = all(char in valid_characters for char in input_text)
+input_text = st.text_input("영문 텍스트를 입력하세요 (대소문자 알파벳, 숫자, 띄어쓰기, 특수기호(.,?!()\"':;) 사용 가능):", value="")
+valid_characters = english_characters
+is_valid_input = all(char in valid_characters for char in input_text)
 
 # 입력 검증
 if input_text and not is_valid_input:
@@ -50,6 +42,7 @@ if is_valid_input and input_text:
         average_attempts = 0
 
     st.write(f"입력한 텍스트가 나오기까지 평균적으로 필요한 문자 생성 횟수: {format(average_attempts, ',')}")
+    st.write(f"약 {format(format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 텍스트가 등장합니다.")
 
     # 생성 버튼 및 중지 버튼
     start_button = st.button("생성 시작")
@@ -66,19 +59,20 @@ if is_valid_input and input_text:
     # 텍스트 생성을 중지하는 함수
     def stop_generation():
         st.session_state.running = False
+        sample_area = st.empty()
         char_count_display = st.empty()
         text_area = st.empty()
+        sample_area.write(f"입력한 텍스트: {input_text}")
         char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
         text_area.markdown(f"<div style='word-wrap: break-word;'>{st.session_state.generated_text[-400:]}</div>", unsafe_allow_html=True)
             
-
-
     # 텍스트 생성을 시작하는 함수
     def start_generation():
         st.session_state.running = True
         st.session_state.generated_text = ''
         st.session_state.char_count = 0
-        
+
+        sample_area = st.empty()
         char_count_display = st.empty()
         text_area = st.empty()
 
@@ -92,6 +86,7 @@ if is_valid_input and input_text:
                 st.session_state.running = False
 
             # 생성된 텍스트와 문자 개수 표시
+            sample_area.write(f"입력한 텍스트: {input_text}")
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
             text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{st.session_state.generated_text[-400:]}</div>", unsafe_allow_html=True)
             # UI 업데이트를 위해 슬립 추가
