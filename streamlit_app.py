@@ -88,10 +88,10 @@ if is_valid_input and input_text:
             st.session_state.char_count += 1
             new_char = random.choice(valid_characters)
             st.session_state.generated_text += new_char
+            st.session_state.generated_text = st.session_state.generated_text[-display_num:]
 
             if st.session_state.generated_text[-input_length:] == input_text:
-                display_text = display_text.replace(input_text, f"<strong>{input_text}</strong>")
-                st.write(display_text[-20:])
+                display_text = st.session_state.generated_text.replace(input_text, f"<strong>{input_text}</strong>")
                 sample_area.write(f"입력한 텍스트: {input_text}")
                 char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
                 text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{display_text}</div>", unsafe_allow_html=True)
@@ -102,8 +102,8 @@ if is_valid_input and input_text:
             sample_area.write(f"입력한 텍스트: {input_text}")
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
             
-            display_text = st.session_state.generated_text[-display_num:]
-            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{display_text}</div>", unsafe_allow_html=True)
+            
+            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{st.session_state.generated_text}</div>", unsafe_allow_html=True)
             time.sleep(0.005)
 
     # 버튼 동작 설정
