@@ -83,6 +83,7 @@ if is_valid_input and input_text:
         sample_area = st.empty()
         char_count_display = st.empty()
         text_area = st.empty()
+        match_found = False
 
         while st.session_state.running:
             st.session_state.char_count += 1
@@ -90,14 +91,19 @@ if is_valid_input and input_text:
             st.session_state.generated_text += new_char
 
             if st.session_state.generated_text[-input_length:] == input_text:
+                math_found=True
                 st.success(f"입력한 텍스트 '{input_text}'와 동일한 문자열이 생성되었습니다!")
                 st.session_state.running = False
 
             # 생성된 텍스트와 문자 개수 표시
             sample_area.write(f"입력한 텍스트: {input_text}")
             char_count_display.write(f"현재까지 입력된 문자 개수: {format(st.session_state.char_count,',')}")
-            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{st.session_state.generated_text[-display_num:]}</div>", unsafe_allow_html=True)
-            # UI 업데이트를 위해 슬립 추가
+            
+            display_text = st.session_state.generated_text[-display_num:]
+            if match_found:
+                display_text = display_text.replace(input_text, f"<strong>{input_text}</strong>")
+            text_area.markdown(f"<div style='word-wrap: break-word; word-break: break-all;'>{display_text}</div>", unsafe_allow_html=True)
+            char_count_display.write(f"현재까지 입력된 문자 개수: {st.session_state.char_count}")
             time.sleep(0.005)
 
     # 버튼 동작 설정
