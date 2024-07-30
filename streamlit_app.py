@@ -45,7 +45,12 @@ if is_valid_input and input_text:
     st.write(f"약 {format(average_attempts*2, ',')}번 생성시 99% 확률로 입력한 텍스트가 등장합니다.")
 
     # 생성 버튼 및 중지 버튼
-    display_num = st.slider('화면에 표시할 텍스트 길이', 100, 10000, 500, 10)
+    display_num = 500
+    status = st.radio('화면에 표시할 텍스트 길이', ['기본값(500)', '직접 설정하기', '무제한'])
+    if status == '직접 설정하기':
+        display_num = st.slider('화면에 표시할 텍스트 길이', 100, 10000, 500, 10)
+    elif status == '무제한':
+        display_num = 0
     start_button = st.button("생성 시작")
     stop_button = st.button("중지")
 
